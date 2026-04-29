@@ -373,7 +373,7 @@
   <div class="section-divider"></div>
 
   <!-- F00 ALZHEIMER -->
-  <h2 class="section-title">
+  <h2 class="section-title" id="F00">
     <span>Alzheimer's Disease</span>
     <span class="code-badge">F00</span>
   </h2>
@@ -427,7 +427,7 @@
   <div class="section-divider"></div>
 
   <!-- F01 VASCULAR -->
-  <h2 class="section-title">
+  <h2 class="section-title" id="F01">
     <span>Vascular Dementia</span>
     <span class="code-badge">F01</span>
   </h2>
@@ -453,7 +453,7 @@
   <div class="section-divider"></div>
 
   <!-- F02 OTHER DEMENTIAS -->
-  <h2 class="section-title">
+  <h2 class="section-title" id="F02">
     <span>Dementia in Other Diseases</span>
     <span class="code-badge">F02</span>
   </h2>
@@ -503,7 +503,7 @@
   <div class="section-divider"></div>
 
   <!-- F03 + F04 + F05 -->
-  <h2 class="section-title">
+  <h2 class="section-title" id="F03">
     <span>Unspecified Dementia</span>
     <span class="code-badge">F03</span>
   </h2>
@@ -511,7 +511,7 @@
     <p>Used when dementia criteria are met but it is not possible to classify the condition into any specific type (F00–F02.9).</p>
   </div>
 
-  <h2 class="section-title" style="margin-top: 36px;">
+  <h2 class="section-title" style="margin-top: 36px;" id="F04">
     <span>Organic Amnesic Syndrome</span>
     <span class="code-badge">F04</span>
   </h2>
@@ -519,7 +519,7 @@
     <p>Prominent impairment of recent and remote memory while immediate recall remains intact. New learning is severely reduced, causing anterograde amnesia. Confabulation (unconscious fabrication of memories) may be present. Often linked to lesions in the hippocampus or hypothalamic-diencephalic system. Near-complete recovery is possible if the underlying lesion is treatable.</p>
   </div>
 
-  <h2 class="section-title" style="margin-top: 36px;">
+  <h2 class="section-title" style="margin-top: 36px;" id="F05">
     <span>Delirium</span>
     <span class="code-badge">F05</span>
   </h2>
@@ -529,7 +529,7 @@
     This category covers delirium <em>not</em> caused by alcohol or psychoactive substances. Drug-induced delirium (e.g. acute confusion from antidepressants in elderly patients) is coded here; the medication should be additionally coded using Chapter XIX of ICD-10.
   </div>
 
-  <div class="prose">
+  <div class="prose" data-search="A transient syndrome of concurrent disturbance of consciousness attention perception thinking memory psychomotor behaviour emotion and the sleep-wake cycle">
     <p>A transient syndrome of concurrent disturbance of consciousness, attention, perception, thinking, memory, psychomotor behaviour, emotion and the sleep-wake cycle. Most common after age 60. Most cases recover within 4 weeks, but delirium can persist up to 6 months in chronic liver disease, carcinoma, or bacterial endocarditis. A delirious state may be superimposed on — or progress into — dementia.</p>
   </div>
 
@@ -546,6 +546,40 @@
   </table>
 
 </div><!-- /page -->
+<script>
+window.onload = function () {
+  const query = localStorage.getItem("searchQuery");
 
+  if (!query) return;
+
+  function highlightText(element) {
+    if (element.children.length === 0) {
+      const text = element.innerHTML;
+      const regex = new RegExp(`(${query})`, "gi");
+
+      if (regex.test(text)) {
+        element.innerHTML = text.replace(
+          regex,
+          `<mark style="background: yellow; padding: 2px;">$1</mark>`
+        );
+
+        const mark = element.querySelector("mark");
+        if (mark) {
+          mark.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });	
+        }
+      }
+    } else {
+      Array.from(element.children).forEach(child => highlightText(child));
+    }
+  }
+
+  highlightText(document.body);
+
+  localStorage.removeItem("searchQuery");
+};
+</script>
 </body>
 </html>
