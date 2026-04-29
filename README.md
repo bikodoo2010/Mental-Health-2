@@ -131,7 +131,7 @@ It helps learners study ICD classifications in a more accessible and engaging wa
 
 ## Author
 
-Created by Bikodoo
+Created by Beibarys and Sasha
 
 GitHub Repository:
 https://github.com/bikodoo2010/Mental-Health-2
