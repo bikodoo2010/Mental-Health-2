@@ -1,28 +1,35 @@
+
 # Mental Health 2
 
-A modern educational web project about mental and behavioral disorders based on ICD-10 classifications.
+Mental Health 2 is an educational web project focused on mental and behavioural disorders based on ICD-10 classifications.
 
-## Overview
-
-Mental Health 2 is a structured website designed to present important information about mental disorders in a clean, professional, and easy-to-understand format. The project focuses on ICD-10 Chapter V classifications, especially organic mental disorders such as dementia, Alzheimer's disease, vascular dementia, delirium, and related conditions.
-
-The goal of this project is to make medical classification content more accessible for students, learners, and anyone interested in mental health education.
+The website provides structured information about dementia, Alzheimer's disease, vascular dementia, delirium, and other organic mental disorders. It is designed to help students and learners better understand ICD Chapter V in a clear, simple, and professional format.
 
 ---
 
-## Features
+## Website Sections
 
-- Clean and responsive UI design
-- Structured ICD-10 classification sections
-- Detailed explanations of dementia and related disorders
-- Disease subtype tables with ICD codes
-- Visual content with medical illustrations
-- Professional academic-style layout
-- Mobile-friendly navigation
+### Home
+
+The homepage introduces the purpose of the project and helps users navigate through the platform.
+
+It includes:
+
+- Mental Health Education overview
+- Important educational disclaimer
+- Quick access to ICD classifications
+- Mental health tests section
+- Search system for fast navigation
 
 ---
 
-## Main Topics Covered
+### ICD Reference
+
+This section covers ICD-10 Chapter V:
+
+## Mental & Behavioural Disorders: Organic Conditions
+
+### Main Topics:
 
 - F00 – Alzheimer's Disease
 - F01 – Vascular Dementia
@@ -30,7 +37,52 @@ The goal of this project is to make medical classification content more accessib
 - F03 – Unspecified Dementia
 - F04 – Organic Amnesic Syndrome
 - F05 – Delirium
-- F00–F09 Organic Mental Disorders Overview
+- F00–F09 – Organic Mental Disorders Overview
+
+Each section includes:
+
+- medical explanations
+- symptom descriptions
+- subtype tables
+- ICD code classifications
+- visual medical illustrations
+
+---
+
+### Tests
+
+This section is designed for self-assessment and educational mental health screening.
+
+Users can complete simple evidence-based questionnaires to better understand their mental wellbeing.
+
+Important: test results are educational only and do not replace professional diagnosis.
+
+---
+
+### Search
+
+The search page helps users quickly find:
+
+- disorders
+- ICD codes
+- symptoms
+- classifications
+- related medical information
+
+This improves navigation and learning efficiency.
+
+---
+
+## Features
+
+- Responsive modern design
+- Professional academic layout
+- ICD-10 structured content
+- Detailed disease explanations
+- Medical illustrations
+- Easy navigation
+- Mobile-friendly interface
+- Educational focus only
 
 ---
 
@@ -53,26 +105,27 @@ Mental-Health-2/
 ├── search.html
 ├── image_1.jpeg
 ├── image_2.jpeg
-├── style.css
-└── README.md
+├── README.md
 ````
 
 ---
 
 ## Purpose
 
-This project was created for educational purposes to simplify the understanding of ICD mental disorder classifications and improve visual learning through structured design and clear presentation.
+This project was created for educational purposes to simplify the understanding of mental health disorders and improve visual learning through structured medical content.
+
+It helps learners study ICD classifications in a more accessible and engaging way.
 
 ---
 
 ## Future Improvements
 
 * Add ICD-11 classifications
-* Search functionality for diagnoses
-* Interactive quizzes and tests
+* More mental health chapters
+* Interactive quizzes
 * Dark mode support
-* More medical illustrations
-* Additional mental health chapters
+* Better search functionality
+* Additional medical illustrations
 
 ---
 
@@ -80,12 +133,14 @@ This project was created for educational purposes to simplify the understanding 
 
 Created by Bikodoo
 
-GitHub: https://github.com/bikodoo2010/Mental-Health-2
+GitHub Repository:
+https://github.com/bikodoo2010/Mental-Health-2
 
 ---
 
 ## License
 
-This project is created for educational and non-commercial use.
+This project is intended for educational and non-commercial use only.
+
 ```
 ```
