@@ -1,4 +1,3 @@
-````md
 # Mental Health 2
 
 A modern educational web project about mental and behavioral disorders based on ICD-10 classifications.
@@ -88,6 +87,5 @@ GitHub: https://github.com/bikodoo2010/Mental-Health-2
 ## License
 
 This project is created for educational and non-commercial use.
-
 ```
 ```
