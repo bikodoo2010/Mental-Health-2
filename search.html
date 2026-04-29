@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Навигация -->
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="icd.html">ICD</a>
+    <a href="tests.html">Tests</a>
+    <a href="search.html" class="active">Search</a>
+  </div>
+
+  <!-- Контент -->
+  <div class="page">
+
+    <section class="hero">
+      <span class="hero-label">Explore</span>
+      <h1>Search ICD Codes</h1>
+      <p>Use this section to search for information about ICD mental health codes and topics.</p>
+    </section>
+
+    <!-- Поисковая форма -->
+    <div class="search-wrap">
+      <div class="search-row">
+        <input id="searchInput" type="text" placeholder="Enter ICD code or keyword...">
+        <button onclick="performSearch()">Search</button>
+      </div>
+    </div>
+
+    <!-- Результаты -->
+    <div id="results" class="search-results"></div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2026 Mental Health Project · <a href="index.html">Home</a></p>
+  </footer>
+
+<script>
+  // Пример ICD данных
+  const icdData = [
+    { code: "F32", title: "Major Depressive Disorder", desc: "Persistent sadness and loss of interest." },
+    { code: "F41", title: "Generalized Anxiety Disorder", desc: "Excessive worry and anxiety lasting for months." },
+    { code: "F20", title: "Schizophrenia", desc: "Distorted thinking, perceptions, emotions, and behavior." },
+    { code: "F43", title: "Post-Traumatic Stress Disorder", desc: "Stress response after traumatic events." }
+  ];
+
+  function performSearch() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = "";
+
+    const filtered = icdData.filter(item =>
+      item.code.toLowerCase().includes(query) ||
+      item.title.toLowerCase().includes(query) ||
+      item.desc.toLowerCase().includes(query)
+    );
+
+    if (filtered.length === 0) {
+      resultsContainer.innerHTML = "<p>No results found.</p>";
+      return;
+    }
+
+    filtered.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "result-item";
+      div.innerHTML = `
+        <span class="result-code">${item.code}</span>
+        <h4>${item.title}</h4>
+        <p>${item.desc}</p>
+      `;
+      resultsContainer.appendChild(div);
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICD Classifications — Mental Disorders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0d0d3b;
+      --navy-mid: #17175f;
+      --navy-light: #23237a;
+      --accent: #4a6fa5;
+      --accent-soft: #e8edf5;
+      --gold: #c9a84c;
+      --text: #1a1a2e;
+      --muted: #5a5a7a;
+      --border: #d0d4e8;
+      --bg: #f7f8fc;
+      --white: #ffffff;
+      --tag-bg: #eef1fa;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--navy);
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .nav a {
+      flex: 1;
+      text-align: center;
+      padding: 18px 0;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav a:last-child { border-right: none; }
+    .nav a:hover { color: #fff; background: var(--navy-light); }
+
+    /* ── WRAPPER ── */
+    .page {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 56px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 5vw, 52px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.8;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 48px 0 6px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title .code-badge {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--navy);
+      color: var(--gold);
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .subsection-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--navy-mid);
+      margin: 32px 0 8px;
+    }
+
+    /* ── TWO-COLUMN LAYOUT ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 40px;
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    /* ── IMAGE CARD ── */
+    .image-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(13,13,59,0.08);
+      position: sticky;
+      top: 80px;
+    }
+
+    .image-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .image-card-caption {
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--accent-soft);
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    /* ── PROSE ── */
+    .prose p { 
+      font-size: 16px; 
+      color: #2c2c44; 
+      margin-bottom: 16px; 
+      line-height: 1.8; 
+    }
+
+    /* ── SYMPTOM GRID ── */
+    .symptom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 20px 0 28px;
+    }
+
+    .symptom-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--navy-mid);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+    }
+
+    .symptom-card .symptom-icon {
+      font-size: 20px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .symptom-card strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .symptom-card span {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── CODE TABLE ── */
+    .code-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 28px;
+      font-size: 15px;
+    }
+
+    .code-table thead tr {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .code-table thead th {
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .code-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .code-table tbody tr:hover { background: var(--accent-soft); }
+
+    .code-table tbody td {
+      padding: 12px 16px;
+      vertical-align: top;
+      color: var(--text);
+    }
+
+    .code-table .td-code {
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      color: var(--navy-mid);
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    /* ── INFO BOXES ── */
+    .info-box {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-left: 5px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin: 20px 0;
+      font-size: 15px;
+      color: #2c3e60;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--navy-mid);
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      margin: 56px 0 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--navy) 0%, transparent 100%);
+      opacity: 0.15;
+    }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--navy-mid);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .two-col { grid-template-columns: 1fr; }
+      .image-card { position: static; }
+    }
+
+    @media (max-width: 560px) {
+      .nav a { font-size: 13px; padding: 14px 6px; }
+      .hero h1 { font-size: 26px; }
+      .symptom-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <a href="tests.html">Tests</a>
+  <a href="search.html">Search</a>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-label">ICD-10 · Chapter V</span>
+    <h1>Mental &amp; Behavioural Disorders: Organic Conditions</h1>
+    <p>The International Statistical Classification of Diseases (ICD) is a global system listing all diseases and health conditions. Most countries use version 10; some have adopted version 11. This chapter covers organic brain disorders — from dementia to delirium.</p>
+  </section>
+
+  <!-- F00–F09 OVERVIEW -->
+  <h2 class="section-title">
+    <span>Organic Mental Disorders Overview</span>
+    <span class="code-badge">F00–F09</span>
+  </h2>
+
+  <div class="two-col">
+    <div>
+      <h3 class="subsection-title">What is Dementia?</h3>
+      <div class="prose">
+        <p>Dementia is not a single disease — it is an umbrella term for a progressive decline in cognitive abilities severe enough to interfere with daily life. Think of the brain as a vast library: with dementia, books fall off shelves, labels fade, and eventually the librarian can no longer find anything.</p>
+        <p>It is <em>not</em> a normal part of ageing. Forgetting where you put your keys is normal; forgetting what keys are used for is not. The most common type is Alzheimer's disease (60–80% of all cases). No cure currently exists, but some medications can slow progression.</p>
+      </div>
+
+      <h3 class="subsection-title">Core Signs Across All Types</h3>
+      <div class="symptom-grid">
+        <div class="symptom-card">
+          <strong>Memory loss</strong>
+          <span>Recent events fade first; distant memories persist longer</span>
+        </div>
+        <div class="symptom-card">
+          <strong>Confusion &amp; disorientation</strong>
+          <span>Getting lost in familiar places, mixing day and night</span>
+        </div>
+        <div class="symptom-card">
+          <strong>Difficulty with daily tasks</strong>
+          <span>Cooking, paying bills, getting dressed independently</span>
+        </div>
+        <div class="symptom-card">
+          <strong>Personality changes</strong>
+          <span>Previously calm people becoming suspicious or aggressive</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="image-card">
+        <img src="image_1.jpeg" alt="Illustration of brain sections and dementia stages">
+        <div class="image-card-caption">Schematic illustration of cognitive regions affected in dementia progression.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- F00 ALZHEIMER -->
+  <h2 class="section-title">
+    <span>Alzheimer's Disease</span>
+    <span class="code-badge">F00</span>
+  </h2>
+
+  <div class="info-box">
+    <strong>Key facts</strong>
+    The most common dementia type. Onset is typically insidious — gradual and slow over 2–10+ years — usually appearing between ages 65–70. Family history increases risk.
+  </div>
+
+  <h3 class="subsection-title">Symptoms in Detail</h3>
+  <div class="symptom-grid">
+    <div class="symptom-card">
+      <strong>Short-term memory loss</strong>
+      <span>Forgetting recent information, asking the same question repeatedly</span>
+    </div>
+    <div class="symptom-card">
+      <strong>Thinking &amp; planning</strong>
+      <span>Difficulty managing budgets, following recipes, abstract reasoning</span>
+    </div>
+    <div class="symptom-card">
+      <strong>Language problems</strong>
+      <span>Struggling to find words; calling a "watch" a "hand-clock"</span>
+    </div>
+    <div class="symptom-card">
+      <strong>Visuospatial difficulties</strong>
+      <span>Trouble reading, judging distance, recognising faces</span>
+    </div>
+    <div class="symptom-card">
+      <strong>Misplacing things</strong>
+      <span>Putting keys in the fridge; may accuse others of stealing</span>
+    </div>
+    <div class="symptom-card">
+      <strong>Mood &amp; behaviour</strong>
+      <span>Depression, anxiety, suspicion; delusions and hallucinations in late stages</span>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Subtypes</h3>
+  <table class="code-table">
+    <thead>
+      <tr><th>Code</th><th>Subtype</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-code">F00.0</td><td>Early onset</td><td>Begins before age 65; typically faster progression</td></tr>
+      <tr><td class="td-code">F00.1</td><td>Late onset</td><td>Begins after age 65 (usually late 70s); slower progression; memory most affected</td></tr>
+      <tr><td class="td-code">F00.2</td><td>Atypical / mixed</td><td>Does not fit F00.0 or F00.1; includes mixed Alzheimer's and vascular dementia</td></tr>
+      <tr><td class="td-code">F00.9</td><td>Unspecified</td><td>Alzheimer's confirmed but type not further specified</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-divider"></div>
+
+  <!-- F01 VASCULAR -->
+  <h2 class="section-title">
+    <span>Vascular Dementia</span>
+    <span class="code-badge">F01</span>
+  </h2>
+
+  <div class="prose">
+    <p>Caused by reduced blood flow to the brain, often following one or more strokes. Symptoms closely overlap with Alzheimer's, but the history of onset is tied to vascular events. Formerly called arteriosclerotic dementia.</p>
+  </div>
+
+  <table class="code-table">
+    <thead>
+      <tr><th>Code</th><th>Subtype</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-code">F01.0</td><td>Acute onset</td><td>Develops rapidly after a succession of strokes (thrombosis, embolism, haemorrhage)</td></tr>
+      <tr><td class="td-code">F01.1</td><td>Multi-infarct</td><td>Gradual onset after multiple minor ischaemic episodes accumulating infarcts</td></tr>
+      <tr><td class="td-code">F01.2</td><td>Subcortical</td><td>Damage in deep white matter; linked to high blood pressure; cortex usually preserved. Severe cases may be called Binswanger's encephalopathy</td></tr>
+      <tr><td class="td-code">F01.3</td><td>Mixed cortical &amp; subcortical</td><td>Clinical features or autopsy findings indicate both components</td></tr>
+      <tr><td class="td-code">F01.8</td><td>Other</td><td>Other specified vascular dementias</td></tr>
+      <tr><td class="td-code">F01.9</td><td>Unspecified</td><td>Vascular dementia, type not further specified</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-divider"></div>
+
+  <!-- F02 OTHER DEMENTIAS -->
+  <h2 class="section-title">
+    <span>Dementia in Other Diseases</span>
+    <span class="code-badge">F02</span>
+  </h2>
+
+  <div class="prose">
+    <p>Dementias caused by conditions other than Alzheimer's disease or vascular damage. Can begin at any age, though rarely starts in very old age.</p>
+  </div>
+
+  <table class="code-table">
+    <thead>
+      <tr><th>Code</th><th>Disease</th><th>Key Features</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-code">F02.0</td>
+        <td><strong>Frontotemporal (Pick's)</strong></td>
+        <td>Usually 50–60 years old. Early gradual personality changes before memory loss; frontal and temporal atrophy; no Alzheimer-type plaques/tangles</td>
+      </tr>
+      <tr>
+        <td class="td-code">F02.1</td>
+        <td><strong>Creutzfeldt–Jakob disease</strong></td>
+        <td>Rapid subacute progression; caused by a transmissible agent (prion). Death usually within 1–2 years of onset</td>
+      </tr>
+      <tr>
+        <td class="td-code">F02.2</td>
+        <td><strong>Huntington's disease</strong></td>
+        <td>Autosomal dominant inheritance (50% risk to children). Onset 30s–40s. Early symptoms may be psychiatric (depression, paranoia) before motor signs</td>
+      </tr>
+      <tr>
+        <td class="td-code">F02.3</td>
+        <td><strong>Parkinson's disease</strong></td>
+        <td>Dementia appearing in advanced Parkinson's; exact relationship to Alzheimer's still unclear; used mainly for research classification</td>
+      </tr>
+      <tr>
+        <td class="td-code">F02.4</td>
+        <td><strong>HIV-associated dementia</strong></td>
+        <td>Forgetfulness, slow processing, poor concentration. Children develop neurodevelopmental disorder. Progresses rapidly to global dementia in many cases</td>
+      </tr>
+      <tr>
+        <td class="td-code">F02.8</td>
+        <td><strong>Other specified diseases</strong></td>
+        <td>Dementia as a manifestation of various other cerebral or somatic conditions; underlying condition coded separately</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-divider"></div>
+
+  <!-- F03 + F04 + F05 -->
+  <h2 class="section-title">
+    <span>Unspecified Dementia</span>
+    <span class="code-badge">F03</span>
+  </h2>
+  <div class="prose">
+    <p>Used when dementia criteria are met but it is not possible to classify the condition into any specific type (F00–F02.9).</p>
+  </div>
+
+  <h2 class="section-title" style="margin-top: 36px;">
+    <span>Organic Amnesic Syndrome</span>
+    <span class="code-badge">F04</span>
+  </h2>
+  <div class="prose">
+    <p>Prominent impairment of recent and remote memory while immediate recall remains intact. New learning is severely reduced, causing anterograde amnesia. Confabulation (unconscious fabrication of memories) may be present. Often linked to lesions in the hippocampus or hypothalamic-diencephalic system. Near-complete recovery is possible if the underlying lesion is treatable.</p>
+  </div>
+
+  <h2 class="section-title" style="margin-top: 36px;">
+    <span>Delirium</span>
+    <span class="code-badge">F05</span>
+  </h2>
+
+  <div class="info-box">
+    <strong>Important distinction</strong>
+    This category covers delirium <em>not</em> caused by alcohol or psychoactive substances. Drug-induced delirium (e.g. acute confusion from antidepressants in elderly patients) is coded here; the medication should be additionally coded using Chapter XIX of ICD-10.
+  </div>
+
+  <div class="prose">
+    <p>A transient syndrome of concurrent disturbance of consciousness, attention, perception, thinking, memory, psychomotor behaviour, emotion and the sleep-wake cycle. Most common after age 60. Most cases recover within 4 weeks, but delirium can persist up to 6 months in chronic liver disease, carcinoma, or bacterial endocarditis. A delirious state may be superimposed on — or progress into — dementia.</p>
+  </div>
+
+  <table class="code-table">
+    <thead>
+      <tr><th>Code</th><th>Subtype</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-code">F05.0</td><td>Not superimposed on dementia</td><td>Delirium in a person without pre-existing dementia</td></tr>
+      <tr><td class="td-code">F05.1</td><td>Superimposed on dementia</td><td>Delirium developing in the course of an existing dementia (F00–F03)</td></tr>
+      <tr><td class="td-code">F05.8</td><td>Other delirium</td><td>Includes mixed-origin delirium and subacute confusional states</td></tr>
+      <tr><td class="td-code">F05.9</td><td>Unspecified</td><td>Delirium, type not further specified</td></tr>
+    </tbody>
+  </table>
+
+</div><!-- /page -->
+
+</body>
+</html>

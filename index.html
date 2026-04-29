@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health — Home</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .big-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .big-nav-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-bottom: 4px solid var(--navy-mid);
+      border-radius: 12px 12px 0 0;
+      padding: 36px 28px 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .big-nav-card:hover {
+      box-shadow: 0 10px 32px rgba(13,13,59,0.12);
+      transform: translateY(-4px);
+    }
+
+    .big-nav-card .nav-icon {
+      font-size: 36px;
+      margin-bottom: 4px;
+    }
+
+    .big-nav-card .nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--navy);
+      padding: 3px 10px;
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+
+    .big-nav-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+    }
+
+    .big-nav-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .big-nav-card .arrow {
+      margin-top: auto;
+      padding-top: 16px;
+      color: var(--navy-mid);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .disclaimer {
+      background: #fff8e8;
+      border: 1px solid #e8d499;
+      border-left: 5px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      font-size: 14px;
+      color: #5a4a10;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .disclaimer strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #7a6010;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 680px) {
+      .big-nav-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="active">Home</a>
+  <a href="icd.html">ICD</a>
+  <a href="tests.html">Tests</a>
+  <a href="search.html">Search</a>
+</nav>
+
+<div class="page">
+
+  <section class="hero">
+    <span class="hero-label">Mental Health Education</span>
+    <h1>Understanding the Mind,<br>One Step at a Time</h1>
+    <p>This site is a self-education resource about mental health conditions, diagnoses, and assessments. If you suspect you may be experiencing difficulties, please consult a qualified specialist.</p>
+  </section>
+
+  <div class="disclaimer">
+    <strong>Important notice</strong>
+    This site is intended for educational purposes only. Nothing here constitutes medical advice or a clinical diagnosis. Always seek professional support for personal mental health concerns.
+  </div>
+
+  <h2 class="section-title">Explore the Site</h2>
+
+  <div class="big-nav-grid">
+    <a class="big-nav-card" href="icd.html">
+      <span class="nav-icon">📋</span>
+      <span class="nav-label">Reference</span>
+      <h2>ICD Classifications</h2>
+      <p>Browse the International Classification of Diseases — mental and behavioural disorders from F00 to F99, with detailed descriptions and subcodes.</p>
+      <span class="arrow">Open reference →</span>
+    </a>
+
+    <a class="big-nav-card" href="tests.html">
+      <span class="nav-icon">🧪</span>
+      <span class="nav-label">Self-assessment</span>
+      <h2>Mental Health Tests</h2>
+      <p>Take evidence-based screening questionnaires to better understand your mental wellbeing. Results are educational, not diagnostic.</p>
+      <span class="arrow">Take a test →</span>
+    </a>
+
+    <a class="big-nav-card" href="search.html">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-label">Find information</span>
+      <h2>Search</h2>
+      <p>Search across all conditions, codes, and articles. Find exactly what you're looking for quickly and easily.</p>
+      <span class="arrow">Start searching →</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  Made with care · Since 2026 — until now
+</footer>
+
+</body>
+</html>
