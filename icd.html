@@ -32,7 +32,6 @@
       min-height: 100vh;
     }
 
-    /* ── NAV ── */
     .nav {
       background: var(--navy);
       display: flex;
@@ -59,14 +58,12 @@
     .nav a:last-child { border-right: none; }
     .nav a:hover { color: #fff; background: var(--navy-light); }
 
-    /* ── WRAPPER ── */
     .page {
       max-width: 1140px;
       margin: 0 auto;
       padding: 0 24px 60px;
     }
 
-    /* ── HERO ── */
     .hero {
       padding: 56px 0 40px;
       border-bottom: 1px solid var(--border);
@@ -103,7 +100,6 @@
       line-height: 1.8;
     }
 
-    /* ── SECTION HEADERS ── */
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: 26px;
@@ -135,7 +131,6 @@
       margin: 32px 0 8px;
     }
 
-    /* ── TWO-COLUMN LAYOUT ── */
     .two-col {
       display: grid;
       grid-template-columns: 1fr 340px;
@@ -144,7 +139,6 @@
       margin-top: 16px;
     }
 
-    /* ── IMAGE CARD ── */
     .image-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -169,15 +163,13 @@
       line-height: 1.5;
     }
 
-    /* ── PROSE ── */
-    .prose p { 
-      font-size: 16px; 
-      color: #2c2c44; 
-      margin-bottom: 16px; 
-      line-height: 1.8; 
+    .prose p {
+      font-size: 16px;
+      color: #2c2c44;
+      margin-bottom: 16px;
+      line-height: 1.8;
     }
 
-    /* ── SYMPTOM GRID ── */
     .symptom-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -191,12 +183,6 @@
       border-left: 4px solid var(--navy-mid);
       border-radius: 0 8px 8px 0;
       padding: 14px 16px;
-    }
-
-    .symptom-card .symptom-icon {
-      font-size: 20px;
-      margin-bottom: 6px;
-      display: block;
     }
 
     .symptom-card strong {
@@ -213,7 +199,6 @@
       line-height: 1.5;
     }
 
-    /* ── CODE TABLE ── */
     .code-table {
       width: 100%;
       border-collapse: collapse;
@@ -255,7 +240,6 @@
       font-size: 14px;
     }
 
-    /* ── INFO BOXES ── */
     .info-box {
       background: var(--accent-soft);
       border: 1px solid var(--accent);
@@ -276,7 +260,6 @@
       color: var(--navy-mid);
     }
 
-    /* ── DIVIDER ── */
     .section-divider {
       margin: 56px 0 0;
       height: 1px;
@@ -284,7 +267,6 @@
       opacity: 0.15;
     }
 
-    /* ── TAGS ── */
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 24px; }
 
     .tag {
@@ -297,7 +279,21 @@
       border-radius: 20px;
     }
 
-    /* ── RESPONSIVE ── */
+    /* Chapter header stripe */
+    .chapter-stripe {
+      background: var(--navy);
+      color: var(--gold);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 56px 0 0;
+    }
+
     @media (max-width: 860px) {
       .two-col { grid-template-columns: 1fr; }
       .image-card { position: static; }
@@ -323,11 +319,13 @@
   <!-- HERO -->
   <section class="hero">
     <span class="hero-label">ICD-10 · Chapter V</span>
-    <h1>Mental &amp; Behavioural Disorders: Organic Conditions</h1>
+    <h1>Mental &amp; Behavioural Disorders</h1>
     <p>The International Statistical Classification of Diseases (ICD) is a global system listing all diseases and health conditions. Most countries use version 10; some have adopted version 11. This chapter covers organic brain disorders — from dementia to delirium.</p>
   </section>
 
-  <!-- F00–F09 OVERVIEW -->
+  <!-- ══════════════════════════════════════════
+       F00–F09 ORGANIC DISORDERS
+  ══════════════════════════════════════════ -->
   <h2 class="section-title">
     <span>Organic Mental Disorders Overview</span>
     <span class="code-badge">F00–F09</span>
@@ -361,7 +359,6 @@
         </div>
       </div>
     </div>
-
     <div>
       <div class="image-card">
         <img src="image_1.jpg" alt="Illustration of brain sections and dementia stages">
@@ -372,50 +369,27 @@
 
   <div class="section-divider"></div>
 
-  <!-- F00 ALZHEIMER -->
+  <!-- F00 -->
   <h2 class="section-title" id="F00">
     <span>Alzheimer's Disease</span>
     <span class="code-badge">F00</span>
   </h2>
-
   <div class="info-box">
     <strong>Key facts</strong>
     The most common dementia type. Onset is typically insidious — gradual and slow over 2–10+ years — usually appearing between ages 65–70. Family history increases risk.
   </div>
-
   <h3 class="subsection-title">Symptoms in Detail</h3>
   <div class="symptom-grid">
-    <div class="symptom-card">
-      <strong>Short-term memory loss</strong>
-      <span>Forgetting recent information, asking the same question repeatedly</span>
-    </div>
-    <div class="symptom-card">
-      <strong>Thinking &amp; planning</strong>
-      <span>Difficulty managing budgets, following recipes, abstract reasoning</span>
-    </div>
-    <div class="symptom-card">
-      <strong>Language problems</strong>
-      <span>Struggling to find words; calling a "watch" a "hand-clock"</span>
-    </div>
-    <div class="symptom-card">
-      <strong>Visuospatial difficulties</strong>
-      <span>Trouble reading, judging distance, recognising faces</span>
-    </div>
-    <div class="symptom-card">
-      <strong>Misplacing things</strong>
-      <span>Putting keys in the fridge; may accuse others of stealing</span>
-    </div>
-    <div class="symptom-card">
-      <strong>Mood &amp; behaviour</strong>
-      <span>Depression, anxiety, suspicion; delusions and hallucinations in late stages</span>
-    </div>
+    <div class="symptom-card"><strong>Short-term memory loss</strong><span>Forgetting recent information, asking the same question repeatedly</span></div>
+    <div class="symptom-card"><strong>Thinking &amp; planning</strong><span>Difficulty managing budgets, following recipes, abstract reasoning</span></div>
+    <div class="symptom-card"><strong>Language problems</strong><span>Struggling to find words; calling a "watch" a "hand-clock"</span></div>
+    <div class="symptom-card"><strong>Visuospatial difficulties</strong><span>Trouble reading, judging distance, recognising faces</span></div>
+    <div class="symptom-card"><strong>Misplacing things</strong><span>Putting keys in the fridge; may accuse others of stealing</span></div>
+    <div class="symptom-card"><strong>Mood &amp; behaviour</strong><span>Depression, anxiety, suspicion; delusions and hallucinations in late stages</span></div>
   </div>
-
   <h3 class="subsection-title">Subtypes</h3>
   <table class="code-table">
-    <thead>
-      <tr><th>Code</th><th>Subtype</th><th>Description</th></tr>
-    </thead>
+    <thead><tr><th>Code</th><th>Subtype</th><th>Description</th></tr></thead>
     <tbody>
       <tr><td class="td-code">F00.0</td><td>Early onset</td><td>Begins before age 65; typically faster progression</td></tr>
       <tr><td class="td-code">F00.1</td><td>Late onset</td><td>Begins after age 65 (usually late 70s); slower progression; memory most affected</td></tr>
@@ -426,20 +400,16 @@
 
   <div class="section-divider"></div>
 
-  <!-- F01 VASCULAR -->
+  <!-- F01 -->
   <h2 class="section-title" id="F01">
     <span>Vascular Dementia</span>
     <span class="code-badge">F01</span>
   </h2>
-
   <div class="prose">
     <p>Caused by reduced blood flow to the brain, often following one or more strokes. Symptoms closely overlap with Alzheimer's, but the history of onset is tied to vascular events. Formerly called arteriosclerotic dementia.</p>
   </div>
-
   <table class="code-table">
-    <thead>
-      <tr><th>Code</th><th>Subtype</th><th>Description</th></tr>
-    </thead>
+    <thead><tr><th>Code</th><th>Subtype</th><th>Description</th></tr></thead>
     <tbody>
       <tr><td class="td-code">F01.0</td><td>Acute onset</td><td>Develops rapidly after a succession of strokes (thrombosis, embolism, haemorrhage)</td></tr>
       <tr><td class="td-code">F01.1</td><td>Multi-infarct</td><td>Gradual onset after multiple minor ischaemic episodes accumulating infarcts</td></tr>
@@ -452,57 +422,29 @@
 
   <div class="section-divider"></div>
 
-  <!-- F02 OTHER DEMENTIAS -->
+  <!-- F02 -->
   <h2 class="section-title" id="F02">
     <span>Dementia in Other Diseases</span>
     <span class="code-badge">F02</span>
   </h2>
-
   <div class="prose">
     <p>Dementias caused by conditions other than Alzheimer's disease or vascular damage. Can begin at any age, though rarely starts in very old age.</p>
   </div>
-
   <table class="code-table">
-    <thead>
-      <tr><th>Code</th><th>Disease</th><th>Key Features</th></tr>
-    </thead>
+    <thead><tr><th>Code</th><th>Disease</th><th>Key Features</th></tr></thead>
     <tbody>
-      <tr>
-        <td class="td-code">F02.0</td>
-        <td><strong>Frontotemporal (Pick's)</strong></td>
-        <td>Usually 50–60 years old. Early gradual personality changes before memory loss; frontal and temporal atrophy; no Alzheimer-type plaques/tangles</td>
-      </tr>
-      <tr>
-        <td class="td-code">F02.1</td>
-        <td><strong>Creutzfeldt–Jakob disease</strong></td>
-        <td>Rapid subacute progression; caused by a transmissible agent (prion). Death usually within 1–2 years of onset</td>
-      </tr>
-      <tr>
-        <td class="td-code">F02.2</td>
-        <td><strong>Huntington's disease</strong></td>
-        <td>Autosomal dominant inheritance (50% risk to children). Onset 30s–40s. Early symptoms may be psychiatric (depression, paranoia) before motor signs</td>
-      </tr>
-      <tr>
-        <td class="td-code">F02.3</td>
-        <td><strong>Parkinson's disease</strong></td>
-        <td>Dementia appearing in advanced Parkinson's; exact relationship to Alzheimer's still unclear; used mainly for research classification</td>
-      </tr>
-      <tr>
-        <td class="td-code">F02.4</td>
-        <td><strong>HIV-associated dementia</strong></td>
-        <td>Forgetfulness, slow processing, poor concentration. Children develop neurodevelopmental disorder. Progresses rapidly to global dementia in many cases</td>
-      </tr>
-      <tr>
-        <td class="td-code">F02.8</td>
-        <td><strong>Other specified diseases</strong></td>
-        <td>Dementia as a manifestation of various other cerebral or somatic conditions; underlying condition coded separately</td>
-      </tr>
+      <tr><td class="td-code">F02.0</td><td><strong>Frontotemporal (Pick's)</strong></td><td>Usually 50–60 years old. Early gradual personality changes before memory loss; frontal and temporal atrophy; no Alzheimer-type plaques/tangles</td></tr>
+      <tr><td class="td-code">F02.1</td><td><strong>Creutzfeldt–Jakob disease</strong></td><td>Rapid subacute progression; caused by a transmissible agent (prion). Death usually within 1–2 years of onset</td></tr>
+      <tr><td class="td-code">F02.2</td><td><strong>Huntington's disease</strong></td><td>Autosomal dominant inheritance (50% risk to children). Onset 30s–40s. Early symptoms may be psychiatric (depression, paranoia) before motor signs</td></tr>
+      <tr><td class="td-code">F02.3</td><td><strong>Parkinson's disease</strong></td><td>Dementia appearing in advanced Parkinson's; exact relationship to Alzheimer's still unclear</td></tr>
+      <tr><td class="td-code">F02.4</td><td><strong>HIV-associated dementia</strong></td><td>Forgetfulness, slow processing, poor concentration. Progresses rapidly to global dementia in many cases</td></tr>
+      <tr><td class="td-code">F02.8</td><td><strong>Other specified diseases</strong></td><td>Dementia as a manifestation of various other cerebral or somatic conditions; underlying condition coded separately</td></tr>
     </tbody>
   </table>
 
   <div class="section-divider"></div>
 
-  <!-- F03 + F04 + F05 -->
+  <!-- F03 -->
   <h2 class="section-title" id="F03">
     <span>Unspecified Dementia</span>
     <span class="code-badge">F03</span>
@@ -511,32 +453,29 @@
     <p>Used when dementia criteria are met but it is not possible to classify the condition into any specific type (F00–F02.9).</p>
   </div>
 
-  <h2 class="section-title" style="margin-top: 36px;" id="F04">
+  <!-- F04 -->
+  <h2 class="section-title" style="margin-top:36px;" id="F04">
     <span>Organic Amnesic Syndrome</span>
     <span class="code-badge">F04</span>
   </h2>
   <div class="prose">
-    <p>Prominent impairment of recent and remote memory while immediate recall remains intact. New learning is severely reduced, causing anterograde amnesia. Confabulation (unconscious fabrication of memories) may be present. Often linked to lesions in the hippocampus or hypothalamic-diencephalic system. Near-complete recovery is possible if the underlying lesion is treatable.</p>
+    <p>Prominent impairment of recent and remote memory while immediate recall remains intact. New learning is severely reduced, causing anterograde amnesia. Confabulation may be present. Often linked to lesions in the hippocampus or hypothalamic-diencephalic system. Near-complete recovery is possible if the underlying lesion is treatable.</p>
   </div>
 
-  <h2 class="section-title" style="margin-top: 36px;" id="F05">
+  <!-- F05 -->
+  <h2 class="section-title" style="margin-top:36px;" id="F05">
     <span>Delirium</span>
     <span class="code-badge">F05</span>
   </h2>
-
   <div class="info-box">
     <strong>Important distinction</strong>
     This category covers delirium <em>not</em> caused by alcohol or psychoactive substances. Drug-induced delirium (e.g. acute confusion from antidepressants in elderly patients) is coded here; the medication should be additionally coded using Chapter XIX of ICD-10.
   </div>
-
-  <div class="prose" data-search="A transient syndrome of concurrent disturbance of consciousness attention perception thinking memory psychomotor behaviour emotion and the sleep-wake cycle">
-    <p>A transient syndrome of concurrent disturbance of consciousness, attention, perception, thinking, memory, psychomotor behaviour, emotion and the sleep-wake cycle. Most common after age 60. Most cases recover within 4 weeks, but delirium can persist up to 6 months in chronic liver disease, carcinoma, or bacterial endocarditis. A delirious state may be superimposed on — or progress into — dementia.</p>
+  <div class="prose">
+    <p>A transient syndrome of concurrent disturbance of consciousness, attention, perception, thinking, memory, psychomotor behaviour, emotion and the sleep-wake cycle. Most common after age 60. Most cases recover within 4 weeks, but delirium can persist up to 6 months in chronic liver disease, carcinoma, or bacterial endocarditis.</p>
   </div>
-
   <table class="code-table">
-    <thead>
-      <tr><th>Code</th><th>Subtype</th><th>Description</th></tr>
-    </thead>
+    <thead><tr><th>Code</th><th>Subtype</th><th>Description</th></tr></thead>
     <tbody>
       <tr><td class="td-code">F05.0</td><td>Not superimposed on dementia</td><td>Delirium in a person without pre-existing dementia</td></tr>
       <tr><td class="td-code">F05.1</td><td>Superimposed on dementia</td><td>Delirium developing in the course of an existing dementia (F00–F03)</td></tr>
@@ -545,31 +484,321 @@
     </tbody>
   </table>
 
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════
+       F06 — OTHER ORGANIC MENTAL DISORDERS
+  ══════════════════════════════════════════ -->
+  <h2 class="section-title" id="F06">
+    <span>Other Organic Mental Disorders</span>
+    <span class="code-badge">F06</span>
+  </h2>
+
+  <div class="prose">
+    <p>This category covers mental health problems directly caused by physical issues affecting the brain — whether from brain disease, a bodily illness that impacts the brain (e.g. Cushing's syndrome), or exposure to toxic substances or hormones. The key exception is problems caused by alcohol or psychoactive substances, which are classified elsewhere.</p>
+    <p>What makes these conditions tricky is that their symptoms resemble classic mental health disorders (like schizophrenia or mood disorders) rather than typical signs of a physical brain problem such as dementia or delirium. The physical problem is considered the root cause — not simply a coincidence, and not just the person's emotional reaction to being ill.</p>
+  </div>
+
+  <table class="code-table">
+    <thead><tr><th>Code</th><th>Disorder</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-code">F06.0</td>
+        <td><strong>Organic hallucinosis</strong></td>
+        <td>Persistent or recurrent hallucinations (usually visual or auditory) occurring in clear consciousness. Insight is often preserved. Delusional elaboration of hallucinations may occur.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.1</td>
+        <td><strong>Organic catatonic disorder</strong></td>
+        <td>Diminished (stupor) or increased (excitement) psychomotor activity with catatonic symptoms. The extremes may alternate. Encephalitis and carbon monoxide poisoning are presumed associated causes.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.2</td>
+        <td><strong>Organic delusional disorder</strong></td>
+        <td>Persistent or recurrent delusions dominate the clinical picture. May be accompanied by hallucinations. Features of schizophrenia (bizarre delusions, thought disorder) may also be present.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.3</td>
+        <td><strong>Organic mood disorders</strong></td>
+        <td>Change in mood or affect, usually with a change in overall activity level, directly caused by a cerebral or physical disorder. Includes postinfective depression (e.g. following influenza).
+          <br><br>
+          <em>Five-character subcodes:</em><br>
+          F06.30 Organic manic disorder<br>
+          F06.31 Organic bipolar affective disorder<br>
+          F06.32 Organic depressive disorder<br>
+          F06.33 Organic mixed affective disorder
+        </td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.4</td>
+        <td><strong>Organic anxiety disorder</strong></td>
+        <td>Features of generalised anxiety disorder (F41.1), panic disorder (F41.0), or both, arising as a consequence of an organic disorder (e.g. temporal lobe epilepsy, thyrotoxicosis, phaeochromocytoma).</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.5</td>
+        <td><strong>Organic dissociative disorder</strong></td>
+        <td>Dissociative symptoms (memory loss, disconnection, unexplained physical symptoms) whose real cause is a physical problem affecting the brain — not a psychological reaction to stress.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.6</td>
+        <td><strong>Organic emotionally labile disorder</strong></td>
+        <td>Marked and persistent emotional incontinence or lability, fatiguability, and unpleasant physical sensations (e.g. dizziness). Most often associated with cerebrovascular disease or hypertension.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.7</td>
+        <td><strong>Mild cognitive disorder</strong></td>
+        <td>May precede, accompany, or follow a wide variety of infections and physical disorders (including HIV). Usually does not last more than a few weeks after the patient recovers from the underlying physical disorder.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.8</td>
+        <td><strong>Other specified</strong></td>
+        <td>Examples include abnormal mood states occurring during treatment with steroids or antidepressants.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F06.9</td>
+        <td><strong>Unspecified</strong></td>
+        <td>Unspecified mental disorder due to brain damage, dysfunction, or physical disease.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════
+       F07 — PERSONALITY & BEHAVIOURAL DISORDERS
+  ══════════════════════════════════════════ -->
+  <h2 class="section-title" id="F07">
+    <span>Personality &amp; Behavioural Disorders Due to Brain Disease</span>
+    <span class="code-badge">F07</span>
+  </h2>
+
+  <div class="prose">
+    <p>Alteration of personality and behaviour can be a residual or concomitant disorder of brain disease, damage, or dysfunction. Differences in manifestation may suggest the type or location of the brain problem, but this kind of diagnostic inference should not be overestimated — the underlying cause should always be sought by independent means.</p>
+  </div>
+
+  <table class="code-table">
+    <thead><tr><th>Code</th><th>Disorder</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-code">F07.0</td>
+        <td><strong>Organic personality disorder</strong></td>
+        <td>Significant alteration of habitual premorbid behaviour patterns. Expression of emotions, needs, and impulses is particularly affected. Cognitive defects may occur mainly in planning and anticipating consequences (frontal lobe syndrome), but can arise from lesions in other brain areas.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F07.1</td>
+        <td><strong>Postencephalitic syndrome</strong></td>
+        <td>Residual behavioural change following recovery from viral or bacterial encephalitis. Symptoms are nonspecific and vary widely. Unlike F07.0, this disorder is often reversible.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F07.2</td>
+        <td><strong>Postconcussional syndrome</strong></td>
+        <td>Follows head trauma (usually with loss of consciousness). Symptoms include headache, dizziness, fatigue, irritability, poor concentration, memory impairment, insomnia, and reduced tolerance to stress or alcohol. May involve depression or anxiety. Both organic and psychological factors are proposed as causes.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F07.8</td>
+        <td><strong>Other organic personality/behavioural disorders</strong></td>
+        <td>Various cognitive, emotional, personality, and behavioural disorders not classifiable elsewhere. Includes right hemispheric organic affective disorder (restricted emotional expression without true depression).</td>
+      </tr>
+      <tr>
+        <td class="td-code">F07.9</td>
+        <td><strong>Unspecified</strong></td>
+        <td>Unspecified organic personality and behavioural disorder due to brain disease, damage, or dysfunction.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-divider"></div>
+
+  <!-- F09 -->
+  <h2 class="section-title" id="F09">
+    <span>Unspecified Organic or Symptomatic Mental Disorder</span>
+    <span class="code-badge">F09</span>
+  </h2>
+  <div class="prose">
+    <p>Used only for recording mental disorders of known organic aetiology that cannot be classified under any of the preceding categories F00–F07.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════
+       F10–F19 — PSYCHOACTIVE SUBSTANCE USE
+  ══════════════════════════════════════════ -->
+  <h2 class="section-title" id="F10">
+    <span>Mental &amp; Behavioural Disorders Due to Psychoactive Substance Use</span>
+    <span class="code-badge">F10–F19</span>
+  </h2>
+
+  <div class="info-box">
+    <strong>How to read the codes</strong>
+    In this block, the letter <strong>x</strong> in a code (e.g. F1x.0) stands for the specific substance: F10 = alcohol, F11 = opioids, F12 = cannabinoids, F13 = sedatives/hypnotics, F14 = cocaine, F15 = stimulants, F16 = hallucinogens, F17 = tobacco, F18 = volatile solvents, F19 = multiple or other psychoactive substances.
+  </div>
+
+  <h3 class="subsection-title">Clinical Syndromes (F1x. codes)</h3>
+  <table class="code-table">
+    <thead><tr><th>Code</th><th>Syndrome</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-code">F1x.0</td>
+        <td><strong>Acute intoxication</strong></td>
+        <td>Transient condition following substance administration: disturbed consciousness, cognition, perception, affect, or behaviour. Should be the main diagnosis only if more persistent problems are absent.
+          <br><br><em>Subcodes:</em> Uncomplicated · With trauma · With other medical complications (e.g. haematemesis) · With delirium · With perceptual distortions · With coma · With convulsions · Pathological intoxication (alcohol only — sudden aggression from amounts that wouldn't intoxicate most people)
+        </td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.1</td>
+        <td><strong>Harmful use</strong></td>
+        <td>A pattern of substance use causing damage to health — physical (e.g. hepatitis from injected drugs) or mental (e.g. depressive episodes secondary to heavy alcohol use).</td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.2</td>
+        <td><strong>Dependence syndrome</strong></td>
+        <td>Cluster of physiological, behavioural, and cognitive phenomena in which substance use takes a much higher priority than other behaviours. Central feature is a strong or overpowering desire to take the substance.
+          <br><br><em>Subcodes:</em> Currently abstinent · Abstinent in protected environment · On supervised maintenance/replacement regime · Abstinent with aversive/blocking drugs · Currently using (active dependence) · Continuous use · Episodic use (dipsomania)
+        </td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.3</td>
+        <td><strong>Withdrawal state</strong></td>
+        <td>Symptoms of variable severity on absolute or relative withdrawal after prolonged or high-dose use. Onset and course are time-limited and related to the substance type and dose. May be complicated by convulsions.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.4</td>
+        <td><strong>Withdrawal state with delirium</strong></td>
+        <td>Withdrawal complicated by delirium. Includes alcohol-induced delirium tremens — a short-lived but potentially life-threatening toxic-confusional state with vivid hallucinations, marked tremor, confusion, and autonomic overactivity.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.5</td>
+        <td><strong>Psychotic disorder</strong></td>
+        <td>Psychotic phenomena during or immediately after substance use: vivid hallucinations, delusions, misidentifications, psychomotor disturbances, and abnormal affect. Typically resolves partially within 1 month and fully within 6 months.
+          <br><br><em>Subcodes:</em> Schizophrenia-like · Predominantly delusional · Predominantly hallucinatory (incl. alcoholic hallucinosis) · Predominantly polymorphic · Predominantly depressive · Predominantly manic · Mixed
+        </td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.6</td>
+        <td><strong>Amnesic syndrome</strong></td>
+        <td>Chronic prominent impairment of recent memory; remote memory sometimes impaired; immediate recall preserved. Disturbance of time sense and ordering of events. Confabulation may be present.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.7</td>
+        <td><strong>Residual and late-onset psychotic disorder</strong></td>
+        <td>Substance-induced changes of cognition, affect, personality, or behaviour persisting beyond the period when a direct substance effect would be expected.
+          <br><br><em>Subcodes:</em> Personality or behaviour disorder (meets F07.0) · Residual affective disorder (meets F06.3) · Dementia · Other persisting cognitive impairment · Late-onset psychotic disorder
+        </td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.8</td>
+        <td><strong>Other mental and behavioural disorders</strong></td>
+        <td>Any other disorder where substance use contributed directly but which does not meet criteria for the above categories.</td>
+      </tr>
+      <tr>
+        <td class="td-code">F1x.9</td>
+        <td><strong>Unspecified</strong></td>
+        <td>Unspecified mental and behavioural disorder due to substance use.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════
+       F20–F29 — SCHIZOPHRENIA
+  ══════════════════════════════════════════ -->
+  <h2 class="section-title" id="F20">
+    <span>Schizophrenia, Schizotypal &amp; Delusional Disorders</span>
+    <span class="code-badge">F20–F29</span>
+  </h2>
+
+  <h2 class="section-title" style="margin-top:32px; font-size:22px;" id="F20-main">
+    <span>Schizophrenia</span>
+    <span class="code-badge">F20</span>
+  </h2>
+
+  <div class="prose">
+    <p>Schizophrenic disorders are characterised by fundamental distortions of thinking and perception, and by inappropriate or blunted affect. Clear consciousness and intellectual capacity are usually maintained, although cognitive deficits may evolve over time.</p>
+    <p>The disturbance involves basic functions that give the normal person a feeling of individuality, uniqueness, and self-direction. Intimate thoughts, feelings, and acts are often felt to be known to or shared by others. Hallucinations — especially auditory — are common and may comment on the individual's behaviour or thoughts.</p>
+    <p>Thinking becomes vague, elliptical, and obscure. Mood is characteristically shallow, capricious, or incongruous. The onset may be acute or insidious. The course shows great variation and is not inevitably chronic or deteriorating.</p>
+  </div>
+
+  <h3 class="subsection-title">Diagnostic Symptom Groups</h3>
+  <div class="info-box">
+    <strong>Diagnostic guideline</strong>
+    A minimum of one very clear symptom from groups (a)–(d), or symptoms from at least two of groups (e)–(h), must have been clearly present for most of the time during a period of 1 month or more.
+  </div>
+
+  <div class="symptom-grid">
+    <div class="symptom-card">
+      <strong>(a) Thought interference</strong>
+      <span>Thought echo, thought insertion or withdrawal, and thought broadcasting</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(b) Delusions of control</strong>
+      <span>Feelings of influence or passivity referred to body movements, thoughts, actions, or sensations; delusional perception</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(c) Hallucinatory voices</strong>
+      <span>Running commentary voices, voices discussing the patient, or voices coming from part of the body</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(d) Persistent delusions</strong>
+      <span>Culturally inappropriate or completely impossible delusions — e.g. supernatural powers, communication with aliens</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(e) Persistent hallucinations</strong>
+      <span>In any modality, accompanied by fleeting delusions or over-valued ideas, occurring daily for weeks or months</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(f) Thought disorganisation</strong>
+      <span>Breaks or interpolations in thought, resulting in incoherence, irrelevant speech, or neologisms</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(g) Catatonic behaviour</strong>
+      <span>Excitement, posturing, waxy flexibility, negativism, mutism, or stupor</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(h) Negative symptoms</strong>
+      <span>Marked apathy, poverty of speech, blunted or incongruous emotional responses, social withdrawal — not due to depression or medication</span>
+    </div>
+    <div class="symptom-card">
+      <strong>(i) Behaviour change</strong>
+      <span>Significant loss of interest, aimlessness, self-absorbed attitude, social withdrawal (applies only to simple schizophrenia F20.6; requires at least 1 year)</span>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Pattern of Course (5th character)</h3>
+  <table class="code-table">
+    <thead><tr><th>Code</th><th>Pattern</th></tr></thead>
+    <tbody>
+      <tr><td class="td-code">F20.x0</td><td>Continuous</td></tr>
+      <tr><td class="td-code">F20.x1</td><td>Episodic with progressive deficit</td></tr>
+      <tr><td class="td-code">F20.x2</td><td>Episodic with stable deficit</td></tr>
+      <tr><td class="td-code">F20.x3</td><td>Episodic remittent</td></tr>
+      <tr><td class="td-code">F20.x4</td><td>Incomplete remission</td></tr>
+      <tr><td class="td-code">F20.x5</td><td>Complete remission</td></tr>
+      <tr><td class="td-code">F20.x8</td><td>Other</td></tr>
+      <tr><td class="td-code">F20.x9</td><td>Course uncertain, period of observation too short</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <strong>Important exclusions</strong>
+    Schizophrenia should not be diagnosed in the presence of extensive depressive or manic symptoms, overt brain disease, or during states of drug intoxication or withdrawal. If both schizophrenic and affective symptoms develop together and are evenly balanced, schizoaffective disorder (F25) should be diagnosed instead.
+  </div>
+
 </div><!-- /page -->
+
 <script>
 window.onload = function () {
   const query = localStorage.getItem("searchQuery");
-
   if (!query) return;
 
   function highlightText(element) {
     if (element.children.length === 0) {
       const text = element.innerHTML;
       const regex = new RegExp(`(${query})`, "gi");
-
       if (regex.test(text)) {
-        element.innerHTML = text.replace(
-          regex,
-          `<mark style="background: yellow; padding: 2px;">$1</mark>`
-        );
-
+        element.innerHTML = text.replace(regex, `<mark style="background: yellow; padding: 2px;">$1</mark>`);
         const mark = element.querySelector("mark");
-        if (mark) {
-          mark.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });	
-        }
+        if (mark) mark.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     } else {
       Array.from(element.children).forEach(child => highlightText(child));
@@ -577,7 +806,6 @@ window.onload = function () {
   }
 
   highlightText(document.body);
-
   localStorage.removeItem("searchQuery");
 };
 </script>
