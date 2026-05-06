@@ -12,7 +12,6 @@
       gap: 20px;
       margin: 40px 0;
     }
-
     .big-nav-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -26,73 +25,46 @@
       gap: 10px;
       transition: box-shadow 0.2s, transform 0.2s;
     }
-
     .big-nav-card:hover {
       box-shadow: 0 10px 32px rgba(13,13,59,0.12);
       transform: translateY(-4px);
     }
-
-    .big-nav-card .nav-icon {
-      font-size: 36px;
-      margin-bottom: 4px;
-    }
-
+    .big-nav-card .nav-icon { font-size: 36px; margin-bottom: 4px; }
     .big-nav-card .nav-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: var(--navy);
-      padding: 3px 10px;
-      border-radius: 4px;
-      align-self: flex-start;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); background: var(--navy);
+      padding: 3px 10px; border-radius: 4px; align-self: flex-start;
     }
-
-    .big-nav-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: var(--navy);
-    }
-
-    .big-nav-card p {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .big-nav-card .arrow {
-      margin-top: auto;
-      padding-top: 16px;
-      color: var(--navy-mid);
-      font-weight: 600;
-      font-size: 14px;
-    }
+    .big-nav-card h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--navy); }
+    .big-nav-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .big-nav-card .arrow { margin-top: auto; padding-top: 16px; color: var(--navy-mid); font-weight: 600; font-size: 14px; }
 
     .disclaimer {
-      background: #fff8e8;
-      border: 1px solid #e8d499;
+      background: #fff8e8; border: 1px solid #e8d499;
       border-left: 5px solid var(--gold);
       border-radius: 0 10px 10px 0;
-      padding: 18px 22px;
-      font-size: 14px;
-      color: #5a4a10;
-      line-height: 1.7;
-      margin-bottom: 40px;
+      padding: 18px 22px; font-size: 14px; color: #5a4a10; line-height: 1.7; margin-bottom: 40px;
     }
+    .disclaimer strong { display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #7a6010; margin-bottom: 4px; }
 
-    .disclaimer strong {
-      display: block;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #7a6010;
-      margin-bottom: 4px;
+    /* Nav user pill (shared across pages) */
+    .nav-user {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; color: rgba(255,255,255,0.85);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.2s;
     }
+    .nav-user:hover { background: var(--navy-light); }
+    .nav-user-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; overflow: hidden; flex-shrink: 0;
+    }
+    .nav-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    @media (max-width: 680px) {
-      .big-nav-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 680px) { .big-nav-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -102,10 +74,10 @@
   <a href="icd.html">ICD</a>
   <a href="tests.html">Tests</a>
   <a href="search.html">Search</a>
+  <a href="auth.html" id="navAuthLink" style="visibility:hidden">Sign In</a>
 </nav>
 
 <div class="page">
-
   <section class="hero">
     <span class="hero-label">Mental Health Education</span>
     <h1>Understanding the Mind,<br>One Step at a Time</h1>
@@ -127,15 +99,13 @@
       <p>Browse the International Classification of Diseases — mental and behavioural disorders from F00 to F99, with detailed descriptions and subcodes.</p>
       <span class="arrow">Open reference →</span>
     </a>
-
     <a class="big-nav-card" href="tests.html">
       <span class="nav-icon">🧪</span>
       <span class="nav-label">Self-assessment</span>
       <h2>Mental Health Tests</h2>
-      <p>Take evidence-based screening questionnaires to better understand your mental wellbeing. Results are educational, not diagnostic.</p>
+      <p>Take evidence-based screening questionnaires to better understand your mental wellbeing. Sign in to save your results and track progress over time.</p>
       <span class="arrow">Take a test →</span>
     </a>
-
     <a class="big-nav-card" href="search.html">
       <span class="nav-icon">🔍</span>
       <span class="nav-label">Find information</span>
@@ -144,12 +114,35 @@
       <span class="arrow">Start searching →</span>
     </a>
   </div>
-
 </div>
 
 <footer class="site-footer">
-  Made with care · Since 2026 — until now
+  Made with care · Since 2026
 </footer>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  const app = initializeApp({
+    apiKey: "AIzaSyDz4bj94WP9XBx2aBEgzb3cLYXMoMzO1gI",
+    authDomain: "mental-health-39ec7.firebaseapp.com",
+    projectId: "mental-health-39ec7",
+    storageBucket: "mental-health-39ec7.firebasestorage.app",
+    messagingSenderId: "933182152491",
+    appId: "1:933182152491:web:5c061e000273ea2a2c2f6e"
+  });
+  onAuthStateChanged(getAuth(app), (user) => {
+    const link = document.getElementById('navAuthLink');
+    if (!link) return;
+    if (user) {
+      const avatar = user.photoURL
+        ? `<div class="nav-user-avatar"><img src="${user.photoURL}" alt=""></div>`
+        : `<div class="nav-user-avatar">${(user.displayName || user.email || '?')[0].toUpperCase()}</div>`;
+      link.outerHTML = `<a href="profile.html" class="nav-user">${avatar}<span>${user.displayName || 'Profile'}</span></a>`;
+    } else {
+      link.style.visibility = 'visible';
+    }
+  });
+</script>
 </body>
 </html>
