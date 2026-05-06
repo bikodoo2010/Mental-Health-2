@@ -294,6 +294,22 @@
       margin: 56px 0 0;
     }
 
+    .nav-user {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; color: rgba(255,255,255,0.85);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.2s;
+    }
+    .nav-user:hover { background: var(--navy-light); }
+    .nav-user-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; overflow: hidden; flex-shrink: 0;
+    }
+    .nav-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
     @media (max-width: 860px) {
       .two-col { grid-template-columns: 1fr; }
       .image-card { position: static; }
@@ -310,8 +326,10 @@
 
 <nav class="nav">
   <a href="index.html">Home</a>
+  <a href="icd.html" class="active">ICD</a>
   <a href="tests.html">Tests</a>
   <a href="search.html">Search</a>
+  <a href="auth.html" id="navAuthLink" style="visibility:hidden">Sign In</a>
 </nav>
 
 <div class="page">
@@ -786,6 +804,30 @@
 
 </div><!-- /page -->
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  const app = initializeApp({
+    apiKey: "AIzaSyDz4bj94WP9XBx2aBEgzb3cLYXMoMzO1gI",
+    authDomain: "mental-health-39ec7.firebaseapp.com",
+    projectId: "mental-health-39ec7",
+    storageBucket: "mental-health-39ec7.firebasestorage.app",
+    messagingSenderId: "933182152491",
+    appId: "1:933182152491:web:5c061e000273ea2a2c2f6e"
+  });
+  onAuthStateChanged(getAuth(app), (user) => {
+    const link = document.getElementById('navAuthLink');
+    if (!link) return;
+    if (user) {
+      const avatar = user.photoURL
+        ? `<div class="nav-user-avatar"><img src="${user.photoURL}" alt=""></div>`
+        : `<div class="nav-user-avatar">${(user.displayName || user.email || '?')[0].toUpperCase()}</div>`;
+      link.outerHTML = `<a href="profile.html" class="nav-user">${avatar}<span>${user.displayName || 'Profile'}</span></a>`;
+    } else {
+      link.style.visibility = 'visible';
+    }
+  });
+</script>
 <script>
 window.onload = function () {
   const query = localStorage.getItem("searchQuery");
