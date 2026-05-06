@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Mental Health</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0d0d3b; --navy-mid: #17175f; --navy-light: #23237a;
+      --accent: #4a6fa5; --accent-soft: #e8edf5; --gold: #c9a84c;
+      --text: #1a1a2e; --muted: #5a5a7a; --border: #d0d4e8;
+      --bg: #f7f8fc; --white: #ffffff;
+    }
+    body { background: var(--bg); font-family: 'Source Sans 3', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+    .nav { background: var(--navy); display: flex; border-bottom: 3px solid var(--gold); }
+    .nav a { flex: 1; text-align: center; padding: 18px 0; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s, background 0.2s; border-right: 1px solid rgba(255,255,255,0.08); }
+    .nav a:last-child { border-right: none; }
+    .nav a:hover { color: #fff; background: var(--navy-light); }
+
+    .auth-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+    .auth-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 48px 40px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 8px 40px rgba(13,13,59,0.1);
+    }
+    .auth-label { display: inline-block; background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 3px; margin-bottom: 16px; }
+    .auth-card h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--navy); margin-bottom: 8px; }
+    .auth-card p { font-size: 15px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+
+    .btn-google {
+      width: 100%; padding: 13px 20px; border-radius: 10px;
+      border: 1.5px solid var(--border); background: var(--white);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-weight: 600;
+      color: var(--text); cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 24px;
+    }
+    .btn-google:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(13,13,59,0.08); }
+    .btn-google svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .divider { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .divider span { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--navy-mid); margin-bottom: 6px; letter-spacing: 0.3px; }
+    .field input {
+      width: 100%; padding: 12px 16px; border-radius: 8px;
+      border: 1.5px solid var(--border); background: var(--bg);
+      font-family: 'Source Sans 3', sans-serif; font-size: 15px; color: var(--text);
+      outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus { border-color: var(--navy-mid); background: var(--white); }
+
+    .btn-primary {
+      width: 100%; padding: 13px; border-radius: 10px;
+      background: var(--navy-mid); color: #fff; border: none;
+      font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s; margin-top: 4px;
+    }
+    .btn-primary:hover { background: var(--navy-light); }
+
+    .toggle-mode { text-align: center; margin-top: 20px; font-size: 14px; color: var(--muted); }
+    .toggle-mode a { color: var(--navy-mid); font-weight: 600; cursor: pointer; text-decoration: none; }
+    .toggle-mode a:hover { text-decoration: underline; }
+
+    .error-msg { background: #fff0f0; border: 1px solid #f5c0c0; border-left: 4px solid #d9534f; border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 14px; color: #7a1f1f; margin-bottom: 16px; display: none; }
+    .error-msg.show { display: block; }
+
+    .site-footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; font-size: 13px; padding: 20px 24px; }
+    .site-footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <a href="icd.html">ICD</a>
+  <a href="tests.html">Tests</a>
+  <a href="search.html">Search</a>
+</nav>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <span class="auth-label">Account</span>
+    <h1 id="auth-title">Welcome back</h1>
+    <p id="auth-subtitle">Sign in to save your test results and track your progress over time.</p>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <!-- Google -->
+    <button class="btn-google" onclick="signInGoogle()">
+      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continue with Google
+    </button>
+
+    <div class="divider"><span>or</span></div>
+
+    <!-- Email form -->
+    <div id="emailForm">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="emailInput" placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="passwordInput" placeholder="••••••••" />
+      </div>
+      <button class="btn-primary" id="emailBtn" onclick="handleEmail()">Sign In</button>
+    </div>
+
+    <div class="toggle-mode">
+      <span id="toggleText">Don't have an account?</span>
+      <a onclick="toggleMode()" id="toggleLink">Sign up</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>© 2026 Mental Health Project · <a href="index.html">Home</a></p>
+</footer>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDz4bj94WP9XBx2aBEgzb3cLYXMoMzO1gI",
+    authDomain: "mental-health-39ec7.firebaseapp.com",
+    projectId: "mental-health-39ec7",
+    storageBucket: "mental-health-39ec7.firebasestorage.app",
+    messagingSenderId: "933182152491",
+    appId: "1:933182152491:web:5c061e000273ea2a2c2f6e",
+    measurementId: "G-5K8PX7G3PS"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // If already logged in — redirect
+  onAuthStateChanged(auth, (user) => {
+    if (user) window.location.href = "profile.html";
+  });
+
+  let isSignUp = false;
+
+  window.toggleMode = function() {
+    isSignUp = !isSignUp;
+    document.getElementById('auth-title').textContent = isSignUp ? 'Create account' : 'Welcome back';
+    document.getElementById('auth-subtitle').textContent = isSignUp
+      ? 'Sign up to save your test results and track your mental health over time.'
+      : 'Sign in to save your test results and track your progress over time.';
+    document.getElementById('emailBtn').textContent = isSignUp ? 'Sign Up' : 'Sign In';
+    document.getElementById('toggleText').textContent = isSignUp ? 'Already have an account?' : "Don't have an account?";
+    document.getElementById('toggleLink').textContent = isSignUp ? 'Sign in' : 'Sign up';
+    hideError();
+  };
+
+  window.signInGoogle = async function() {
+    try {
+      await signInWithPopup(auth, provider);
+      window.location.href = "profile.html";
+    } catch (e) {
+      showError(e.message);
+    }
+  };
+
+  window.handleEmail = async function() {
+    const email = document.getElementById('emailInput').value.trim();
+    const password = document.getElementById('passwordInput').value;
+    if (!email || !password) return showError('Please fill in all fields.');
+    try {
+      if (isSignUp) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+      window.location.href = "profile.html";
+    } catch (e) {
+      const msgs = {
+        'auth/user-not-found': 'No account found with this email.',
+        'auth/wrong-password': 'Incorrect password.',
+        'auth/email-already-in-use': 'This email is already registered.',
+        'auth/weak-password': 'Password must be at least 6 characters.',
+        'auth/invalid-email': 'Please enter a valid email address.',
+      };
+      showError(msgs[e.code] || e.message);
+    }
+  };
+
+  function showError(msg) {
+    const el = document.getElementById('errorMsg');
+    el.textContent = msg;
+    el.classList.add('show');
+  }
+  function hideError() {
+    document.getElementById('errorMsg').classList.remove('show');
+  }
+
+  // Enter key
+  document.getElementById('passwordInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') window.handleEmail();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile — Mental Health</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0d0d3b; --navy-mid: #17175f; --navy-light: #23237a;
+      --accent: #4a6fa5; --accent-soft: #e8edf5; --gold: #c9a84c;
+      --text: #1a1a2e; --muted: #5a5a7a; --border: #d0d4e8;
+      --bg: #f7f8fc; --white: #ffffff; --tag-bg: #eef1fa;
+    }
+    body { background: var(--bg); font-family: 'Source Sans 3', sans-serif; line-height: 1.7; min-height: 100vh; }
+
+    .nav { background: var(--navy); display: flex; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); }
+    .nav a { flex: 1; text-align: center; padding: 18px 0; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s, background 0.2s; border-right: 1px solid rgba(255,255,255,0.08); }
+    .nav a:last-child { border-right: none; }
+    .nav a:hover, .nav a.active { color: #fff; background: var(--navy-light); }
+
+    .page { max-width: 1000px; margin: 0 auto; padding: 0 24px 60px; }
+
+    /* Hero / user card */
+    .profile-hero {
+      padding: 48px 0 36px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--navy-mid); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700;
+      flex-shrink: 0; overflow: hidden;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-info h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--navy); margin-bottom: 4px; }
+    .profile-info p { font-size: 15px; color: var(--muted); }
+    .btn-signout {
+      margin-left: auto; padding: 10px 22px; border-radius: 8px;
+      border: 1.5px solid var(--border); background: transparent;
+      font-family: 'Source Sans 3', sans-serif; font-size: 14px; font-weight: 600;
+      color: var(--muted); cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-signout:hover { border-color: #d9534f; color: #d9534f; }
+
+    /* Stats row */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin-bottom: 40px; }
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-top: 3px solid var(--navy-mid);
+      border-radius: 0 0 10px 10px; padding: 20px 18px;
+    }
+    .stat-card .stat-val { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--navy); font-weight: 700; }
+    .stat-card .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* Section title */
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+      color: var(--navy); margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--navy);
+    }
+
+    /* History list */
+    .history-item {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 22px; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+      transition: box-shadow 0.15s;
+    }
+    .history-item:hover { box-shadow: 0 4px 16px rgba(13,13,59,0.07); }
+    .history-score {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .history-score .hs-num { font-size: 18px; font-weight: 700; font-family: 'Playfair Display', serif; }
+    .history-score .hs-max { font-size: 10px; color: var(--muted); }
+    .history-info { flex: 1; }
+    .history-info .hi-name { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+    .history-info .hi-date { font-size: 13px; color: var(--muted); }
+    .history-level {
+      font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+    }
+
+    .empty-state {
+      text-align: center; padding: 60px 20px; color: var(--muted);
+    }
+    .empty-state .es-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state p { font-size: 16px; margin-bottom: 20px; }
+    .btn-primary {
+      display: inline-block; background: var(--navy-mid); color: #fff;
+      font-family: 'Source Sans 3', sans-serif; font-size: 14px; font-weight: 600;
+      padding: 11px 24px; border-radius: 8px; border: none; cursor: pointer;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--navy-light); }
+
+    .loading { text-align: center; padding: 60px; color: var(--muted); font-size: 16px; }
+
+    .site-footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; font-size: 13px; padding: 22px 24px; margin-top: 60px; }
+    .site-footer a { color: var(--gold); text-decoration: none; }
+
+    @media (max-width: 560px) {
+      .profile-hero { flex-direction: column; align-items: flex-start; }
+      .btn-signout { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <a href="icd.html">ICD</a>
+  <a href="tests.html">Tests</a>
+  <a href="search.html">Search</a>
+  <a href="profile.html" class="active">Profile</a>
+</nav>
+
+<div class="page">
+  <div id="loadingView" class="loading">Loading...</div>
+
+  <div id="mainView" style="display:none">
+    <div class="profile-hero">
+      <div class="avatar" id="avatarEl"></div>
+      <div class="profile-info">
+        <h1 id="userName">—</h1>
+        <p id="userEmail">—</p>
+      </div>
+      <button class="btn-signout" onclick="signOut()">Sign out</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow"></div>
+
+    <!-- History -->
+    <div class="section-title">Test History</div>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>© 2026 Mental Health Project · <a href="index.html">Home</a></p>
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut as fbSignOut }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, query, orderBy, getDocs }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDz4bj94WP9XBx2aBEgzb3cLYXMoMzO1gI",
+    authDomain: "mental-health-39ec7.firebaseapp.com",
+    projectId: "mental-health-39ec7",
+    storageBucket: "mental-health-39ec7.firebasestorage.app",
+    messagingSenderId: "933182152491",
+    appId: "1:933182152491:web:5c061e000273ea2a2c2f6e",
+    measurementId: "G-5K8PX7G3PS"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const LEVEL_STYLES = {
+    'None':     { bg: '#E1F5EE', color: '#0F6E56', ringBg: '#E1F5EE', ringColor: '#0F6E56' },
+    'Mild':     { bg: '#FAEEDA', color: '#BA7517', ringBg: '#FAEEDA', ringColor: '#BA7517' },
+    'Moderate': { bg: '#FAECE7', color: '#993C1D', ringBg: '#FAECE7', ringColor: '#993C1D' },
+    'Severe':   { bg: '#FCEBEB', color: '#791F1F', ringBg: '#FCEBEB', ringColor: '#791F1F' },
+  };
+
+  onAuthStateChanged(auth, async (user) => {
+    document.getElementById('loadingView').style.display = 'none';
+    if (!user) { window.location.href = 'auth.html'; return; }
+
+    document.getElementById('mainView').style.display = 'block';
+
+    // Avatar
+    const avatarEl = document.getElementById('avatarEl');
+    if (user.photoURL) {
+      avatarEl.innerHTML = `<img src="${user.photoURL}" alt="">`;
+    } else {
+      avatarEl.textContent = (user.displayName || user.email || '?')[0].toUpperCase();
+    }
+    document.getElementById('userName').textContent = user.displayName || 'Anonymous';
+    document.getElementById('userEmail').textContent = user.email || '';
+
+    // Load results
+    const results = [];
+    try {
+      const q = query(collection(db, 'users', user.uid, 'testResults'), orderBy('date', 'desc'));
+      const snap = await getDocs(q);
+      snap.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
+    } catch (e) {
+      console.error(e);
+    }
+
+    renderStats(results);
+    renderHistory(results);
+  });
+
+  function renderStats(results) {
+    if (results.length === 0) {
+      document.getElementById('statsRow').style.display = 'none';
+      return;
+    }
+    const avg = Math.round(results.reduce((s, r) => s + r.score, 0) / results.length);
+    const latest = results[0];
+    const counts = { None: 0, Mild: 0, Moderate: 0, Severe: 0 };
+    results.forEach(r => { if (counts[r.level] !== undefined) counts[r.level]++; });
+    const mostCommon = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+
+    document.getElementById('statsRow').innerHTML = `
+      <div class="stat-card"><div class="stat-val">${results.length}</div><div class="stat-label">Tests taken</div></div>
+      <div class="stat-card"><div class="stat-val">${avg}<span style="font-size:16px;color:var(--muted)">/21</span></div><div class="stat-label">Average score</div></div>
+      <div class="stat-card"><div class="stat-val" style="font-size:22px">${latest.level}</div><div class="stat-label">Latest result</div></div>
+      <div class="stat-card"><div class="stat-val" style="font-size:22px">${mostCommon}</div><div class="stat-label">Most frequent</div></div>
+    `;
+  }
+
+  function renderHistory(results) {
+    const el = document.getElementById('historyList');
+    if (results.length === 0) {
+      el.innerHTML = `
+        <div class="empty-state">
+          <div class="es-icon">📋</div>
+          <p>You haven't taken any tests yet.</p>
+          <a href="tests.html" class="btn-primary">Take a test</a>
+        </div>`;
+      return;
+    }
+
+    el.innerHTML = results.map(r => {
+      const st = LEVEL_STYLES[r.level] || LEVEL_STYLES['None'];
+      const date = r.date?.toDate ? r.date.toDate() : new Date(r.date);
+      const dateStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      const timeStr = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      return `
+        <div class="history-item">
+          <div class="history-score" style="background:${st.ringBg};border:2px solid ${st.ringColor}">
+            <span class="hs-num" style="color:${st.ringColor}">${r.score}</span>
+            <span class="hs-max">/ 21</span>
+          </div>
+          <div class="history-info">
+            <div class="hi-name">${r.testName || 'Mental Health Test'}</div>
+            <div class="hi-date">${dateStr} at ${timeStr}</div>
+          </div>
+          <span class="history-level" style="background:${st.bg};color:${st.color}">${r.level}</span>
+        </div>`;
+    }).join('');
+  }
+
+  window.signOut = async function() {
+    await fbSignOut(auth);
+    window.location.href = 'auth.html';
+  };
+</script>
+</body>
+</html>
