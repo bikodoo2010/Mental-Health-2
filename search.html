@@ -5,348 +5,199 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search ICD</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .nav-user {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; color: rgba(255,255,255,0.85);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.2s;
+    }
+    .nav-user:hover { background: var(--navy-light); }
+    .nav-user-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; overflow: hidden; flex-shrink: 0;
+    }
+    .nav-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  </style>
 </head>
 <body>
 
-  <!-- Навигация -->
   <div class="nav">
     <a href="index.html">Home</a>
     <a href="icd.html">ICD</a>
     <a href="tests.html">Tests</a>
     <a href="search.html" class="active">Search</a>
+    <a href="auth.html" id="navAuthLink" style="visibility:hidden">Sign In</a>
   </div>
 
-  <!-- Контент -->
   <div class="page">
-
     <section class="hero">
       <span class="hero-label">Explore</span>
       <h1>Search ICD Information</h1>
       <p>Enter ICD code or keyword to find information from the ICD text.</p>
     </section>
 
-    <!-- Поисковая форма -->
     <div class="search-wrap">
       <div class="search-row">
-        <input id="searchInput" type="text" placeholder="Enter ICD code or keyword...">
+        <input id="searchInput" type="text" placeholder="Enter ICD code or keyword..." onkeydown="if(event.key==='Enter') performSearch()">
         <button onclick="performSearch()">Search</button>
       </div>
     </div>
 
-    <!-- Результаты -->
     <div id="results" class="search-results"></div>
-
   </div>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <p>© 2026 Mental Health Project · <a href="index.html">Home</a></p>
   </footer>
 
 <script>
 const searchData = [
-  {
-    text: "Mental Behavioural Disorders Organic Conditions",
-    page: "icd.html",
-    target: "top"
-  },
-  {
-    text: "Dementia is not a single disease it is an umbrella term for a progressive decline in cognitive abilities severe enough to interfere with daily life",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "The brain as a vast library with dementia books fall off shelves labels fade",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "It is not a normal part of ageing forgetting where you put your keys is normal",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "The most common type is Alzheimer's disease 60 80 percent of all cases",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "No cure currently exists but some medications can slow progression",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Memory loss recent events fade first distant memories persist longer",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Confusion disorientation getting lost in familiar places mixing day and night",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Difficulty with daily tasks cooking paying bills getting dressed independently",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Personality changes previously calm people becoming suspicious or aggressive",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Alzheimer's Disease",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "The most common dementia type onset is typically insidious gradual and slow over 2 10 years",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Short term memory loss forgetting recent information asking the same question repeatedly",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Thinking planning difficulty managing budgets following recipes abstract reasoning",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Language problems struggling to find words",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Visuospatial difficulties trouble reading judging distance recognising faces",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Misplacing things putting keys in the fridge",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Mood behaviour depression anxiety suspicion delusions and hallucinations",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "F00.0 Early onset begins before age 65",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "F00.1 Late onset begins after age 65",
-    page: "icd.html",
-    target: "F00"
-  },
-  {
-    text: "Vascular Dementia",
-    page: "icd.html",
-    target: "F01"
-  },
-  {
-    text: "Caused by reduced blood flow to the brain often following one or more strokes",
-    page: "icd.html",
-    target: "F01"
-  },
-  {
-    text: "Formerly called arteriosclerotic dementia",
-    page: "icd.html",
-    target: "F01"
-  },
-  {
-    text: "F01.0 Acute onset develops rapidly after a succession of strokes",
-    page: "icd.html",
-    target: "F01"
-  },
-  {
-    text: "F01.1 Multi infarct gradual onset after multiple minor ischaemic episodes",
-    page: "icd.html",
-    target: "F01"
-  },
-  {
-    text: "F01.2 Subcortical damage in deep white matter",
-    page: "icd.html",
-    target: "F01"
-  },
-  {
-    text: "Dementia in Other Diseases",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "Dementias caused by conditions other than Alzheimer's disease or vascular damage",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "Frontotemporal Picks disease early gradual personality changes before memory loss",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "Creutzfeldt Jakob disease rapid subacute progression",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "Huntington's disease autosomal dominant inheritance 50 percent risk to children",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "Parkinson's disease dementia appearing in advanced Parkinson's",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "HIV associated dementia forgetfulness slow processing poor concentration",
-    page: "icd.html",
-    target: "F02"
-  },
-  {
-    text: "Unspecified Dementia",
-    page: "icd.html",
-    target: "F03"
-  },
-  {
-    text: "Used when dementia criteria are met but it is not possible to classify the condition",
-    page: "icd.html",
-    target: "F03"
-  },
-  {
-    text: "Organic Amnesic Syndrome",
-    page: "icd.html",
-    target: "F04"
-  },
-  {
-    text: "Prominent impairment of recent and remote memory while immediate recall remains intact",
-    page: "icd.html",
-    target: "F04"
-  },
-  {
-    text: "New learning is severely reduced causing anterograde amnesia",
-    page: "icd.html",
-    target: "F04"
-  },
-  {
-    text: "Confabulation unconscious fabrication of memories may be present",
-    page: "icd.html",
-    target: "F04"
-  },
-  {
-    text: "Delirium",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "This category covers delirium not caused by alcohol or psychoactive substances",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "Drug induced delirium acute confusion from antidepressants in elderly patients",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "A transient syndrome of concurrent disturbance of consciousness attention perception thinking memory psychomotor behaviour emotion and the sleep wake cycle",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "Most common after age 60",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "Most cases recover within 4 weeks",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "Delirium can persist up to 6 months",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "A delirious state may be superimposed on or progress into dementia",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "F05.0 Not superimposed on dementia",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "F05.1 Superimposed on dementia",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "F05.8 Other delirium includes mixed origin delirium",
-    page: "icd.html",
-    target: "F05"
-  },
-  {
-    text: "F05.9 Unspecified delirium type not further specified",
-    page: "icd.html",
-    target: "F05"
-  }
+  { text: "Mental Behavioural Disorders Organic Conditions", page: "icd.html", target: "top" },
+  { text: "Dementia is not a single disease it is an umbrella term for a progressive decline in cognitive abilities", page: "icd.html", target: "F00" },
+  { text: "It is not a normal part of ageing forgetting where you put your keys is normal", page: "icd.html", target: "F00" },
+  { text: "The most common type is Alzheimers disease 60 80 percent of all cases", page: "icd.html", target: "F00" },
+  { text: "No cure currently exists but some medications can slow progression", page: "icd.html", target: "F00" },
+  { text: "Memory loss recent events fade first distant memories persist longer", page: "icd.html", target: "F00" },
+  { text: "Confusion disorientation getting lost in familiar places mixing day and night", page: "icd.html", target: "F00" },
+  { text: "Personality changes previously calm people becoming suspicious or aggressive", page: "icd.html", target: "F00" },
+  { text: "Alzheimers Disease", page: "icd.html", target: "F00" },
+  { text: "The most common dementia type onset is typically insidious gradual and slow over 2 10 years", page: "icd.html", target: "F00" },
+  { text: "Short term memory loss forgetting recent information asking the same question repeatedly", page: "icd.html", target: "F00" },
+  { text: "Language problems struggling to find words", page: "icd.html", target: "F00" },
+  { text: "F00.0 Early onset begins before age 65", page: "icd.html", target: "F00" },
+  { text: "F00.1 Late onset begins after age 65", page: "icd.html", target: "F00" },
+  { text: "Vascular Dementia", page: "icd.html", target: "F01" },
+  { text: "Caused by reduced blood flow to the brain often following one or more strokes", page: "icd.html", target: "F01" },
+  { text: "Formerly called arteriosclerotic dementia", page: "icd.html", target: "F01" },
+  { text: "F01.0 Acute onset develops rapidly after a succession of strokes", page: "icd.html", target: "F01" },
+  { text: "F01.1 Multi infarct gradual onset after multiple minor ischaemic episodes", page: "icd.html", target: "F01" },
+  { text: "F01.2 Subcortical damage in deep white matter", page: "icd.html", target: "F01" },
+  { text: "Dementia in Other Diseases", page: "icd.html", target: "F02" },
+  { text: "Frontotemporal Picks disease early gradual personality changes before memory loss", page: "icd.html", target: "F02" },
+  { text: "Creutzfeldt Jakob disease rapid subacute progression prion", page: "icd.html", target: "F02" },
+  { text: "Huntingtons disease autosomal dominant inheritance 50 percent risk to children", page: "icd.html", target: "F02" },
+  { text: "Parkinsons disease dementia appearing in advanced Parkinsons", page: "icd.html", target: "F02" },
+  { text: "HIV associated dementia forgetfulness slow processing poor concentration", page: "icd.html", target: "F02" },
+  { text: "Unspecified Dementia F03", page: "icd.html", target: "F03" },
+  { text: "Organic Amnesic Syndrome F04", page: "icd.html", target: "F04" },
+  { text: "Prominent impairment of recent and remote memory while immediate recall remains intact", page: "icd.html", target: "F04" },
+  { text: "Confabulation unconscious fabrication of memories may be present", page: "icd.html", target: "F04" },
+  { text: "Delirium F05", page: "icd.html", target: "F05" },
+  { text: "Delirium not caused by alcohol or psychoactive substances", page: "icd.html", target: "F05" },
+  { text: "A transient syndrome of concurrent disturbance of consciousness attention perception thinking memory", page: "icd.html", target: "F05" },
+  { text: "Most cases recover within 4 weeks delirium can persist up to 6 months", page: "icd.html", target: "F05" },
+  { text: "F05.0 Not superimposed on dementia", page: "icd.html", target: "F05" },
+  { text: "F05.1 Superimposed on dementia", page: "icd.html", target: "F05" },
+  // F06
+  { text: "Other Organic Mental Disorders F06", page: "icd.html", target: "F06" },
+  { text: "F06.0 Organic hallucinosis persistent or recurrent hallucinations", page: "icd.html", target: "F06" },
+  { text: "F06.1 Organic catatonic disorder diminished or increased psychomotor activity", page: "icd.html", target: "F06" },
+  { text: "F06.2 Organic delusional disorder persistent delusions dominate", page: "icd.html", target: "F06" },
+  { text: "F06.3 Organic mood disorders change in mood affect directly caused by cerebral or physical disorder", page: "icd.html", target: "F06" },
+  { text: "F06.4 Organic anxiety disorder temporal lobe epilepsy thyrotoxicosis", page: "icd.html", target: "F06" },
+  { text: "F06.5 Organic dissociative disorder dissociative symptoms physical cause", page: "icd.html", target: "F06" },
+  { text: "F06.6 Organic emotionally labile disorder cerebrovascular disease hypertension", page: "icd.html", target: "F06" },
+  { text: "F06.7 Mild cognitive disorder HIV infection infections physical disorders", page: "icd.html", target: "F06" },
+  // F07
+  { text: "Personality Behavioural Disorders Due to Brain Disease F07", page: "icd.html", target: "F07" },
+  { text: "F07.0 Organic personality disorder frontal lobe syndrome", page: "icd.html", target: "F07" },
+  { text: "F07.1 Postencephalitic syndrome residual behavioural change following encephalitis", page: "icd.html", target: "F07" },
+  { text: "F07.2 Postconcussional syndrome head trauma headache dizziness fatigue irritability", page: "icd.html", target: "F07" },
+  // F09
+  { text: "F09 Unspecified Organic or Symptomatic Mental Disorder", page: "icd.html", target: "F09" },
+  // F10-F19
+  { text: "Mental Behavioural Disorders Due to Psychoactive Substance Use F10 F19", page: "icd.html", target: "F10" },
+  { text: "F10 alcohol F11 opioids F12 cannabinoids F13 sedatives F14 cocaine F15 stimulants F16 hallucinogens F17 tobacco", page: "icd.html", target: "F10" },
+  { text: "F1x.0 Acute intoxication transient condition following substance administration", page: "icd.html", target: "F10" },
+  { text: "F1x.1 Harmful use pattern of substance use causing damage to health", page: "icd.html", target: "F10" },
+  { text: "F1x.2 Dependence syndrome physiological behavioural cognitive phenomena", page: "icd.html", target: "F10" },
+  { text: "F1x.3 Withdrawal state symptoms on absolute or relative withdrawal", page: "icd.html", target: "F10" },
+  { text: "F1x.4 Withdrawal state with delirium delirium tremens alcohol", page: "icd.html", target: "F10" },
+  { text: "F1x.5 Psychotic disorder hallucinations delusions misidentifications", page: "icd.html", target: "F10" },
+  { text: "F1x.6 Amnesic syndrome chronic impairment of recent memory confabulation", page: "icd.html", target: "F10" },
+  { text: "F1x.7 Residual and late onset psychotic disorder persisting cognition affect personality", page: "icd.html", target: "F10" },
+  // F20
+  { text: "Schizophrenia Schizotypal Delusional Disorders F20 F29", page: "icd.html", target: "F20" },
+  { text: "Schizophrenia fundamental distortions of thinking and perception inappropriate or blunted affect", page: "icd.html", target: "F20" },
+  { text: "Thought interference thought echo insertion withdrawal broadcasting", page: "icd.html", target: "F20" },
+  { text: "Delusions of control influence passivity delusional perception", page: "icd.html", target: "F20" },
+  { text: "Hallucinatory voices running commentary voices discussing the patient", page: "icd.html", target: "F20" },
+  { text: "Negative symptoms apathy poverty of speech blunted emotional responses social withdrawal", page: "icd.html", target: "F20" },
+  { text: "Catatonic behaviour excitement posturing waxy flexibility negativism mutism stupor", page: "icd.html", target: "F20" },
+  { text: "F20.x0 Continuous F20.x1 Episodic progressive deficit F20.x3 Episodic remittent F20.x5 Complete remission", page: "icd.html", target: "F20" },
 ];
 
-// очищаем текст
 function normalizeText(text) {
-  return text
-    .toLowerCase()
-    .replace(/[.,!?;:()"'-]/g, "") // убираем знаки
-    .replace(/\s+/g, " ") // убираем лишние пробелы
-    .trim();
+  return text.toLowerCase().replace(/[.,!?;:()"'-]/g, "").replace(/\s+/g, " ").trim();
 }
 
 function performSearch() {
   const input = document.getElementById("searchInput").value;
   const query = normalizeText(input);
-
   const results = document.getElementById("results");
   results.innerHTML = "";
 
-  if (!query) {
-    results.innerHTML = "<p>Please enter a search term.</p>";
+  if (!query || query.length < 2) {
+    results.innerHTML = '<p style="color:var(--muted);font-size:15px;">Please enter at least 2 characters.</p>';
     return;
   }
 
-  const found = searchData.filter(item => {
+  const words = query.split(" ").filter(w => w.length > 1);
+  const scored = searchData.map(item => {
     const itemText = normalizeText(item.text);
-    return itemText.includes(query) || query.includes(itemText);
-  });
+    let score = 0;
+    if (itemText.includes(query)) score += 10;
+    words.forEach(w => { if (itemText.includes(w)) score += 1; });
+    return { ...item, score };
+  }).filter(i => i.score > 0).sort((a, b) => b.score - a.score);
 
-  if (found.length === 0) {
-    results.innerHTML = "<p>No results found.</p>";
+  if (scored.length === 0) {
+    results.innerHTML = '<p style="color:var(--muted);font-size:15px;">No results found. Try a different keyword or ICD code.</p>';
     return;
   }
 
-  found.forEach(item => {
-    results.innerHTML += `
-      <div class="result-item">
-        <h4>${item.text}</h4>
-        <p>Found in ICD section</p>
-        <a href="${item.page}#${item.target}">
-          Open section
-        </a>
-      </div>
-    `;
-  });
+  results.innerHTML = scored.slice(0, 12).map(item => `
+    <div class="result-item" onclick="openResult('${item.page}', '${item.target}', '${encodeURIComponent(input)}')" style="cursor:pointer">
+      <span class="result-code">${item.target}</span>
+      <h4>${item.text}</h4>
+      <p>Found in ICD section · Click to open and highlight</p>
+    </div>
+  `).join('');
+}
+
+function openResult(page, target, query) {
+  localStorage.setItem("searchQuery", decodeURIComponent(query));
+  window.location.href = page + '#' + target;
 }
 </script>
 
-
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  const app = initializeApp({
+    apiKey: "AIzaSyDz4bj94WP9XBx2aBEgzb3cLYXMoMzO1gI",
+    authDomain: "mental-health-39ec7.firebaseapp.com",
+    projectId: "mental-health-39ec7",
+    storageBucket: "mental-health-39ec7.firebasestorage.app",
+    messagingSenderId: "933182152491",
+    appId: "1:933182152491:web:5c061e000273ea2a2c2f6e"
+  });
+  onAuthStateChanged(getAuth(app), (user) => {
+    const link = document.getElementById('navAuthLink');
+    if (!link) return;
+    if (user) {
+      const avatar = user.photoURL
+        ? `<div class="nav-user-avatar"><img src="${user.photoURL}" alt=""></div>`
+        : `<div class="nav-user-avatar">${(user.displayName || user.email || '?')[0].toUpperCase()}</div>`;
+      link.outerHTML = `<a href="profile.html" class="nav-user">${avatar}<span>${user.displayName || 'Profile'}</span></a>`;
+    } else {
+      link.style.visibility = 'visible';
+    }
+  });
+</script>
 </body>
 </html>
